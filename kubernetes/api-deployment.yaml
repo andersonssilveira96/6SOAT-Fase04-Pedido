@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+  labels:
+    app: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      name: pod-api
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api-container
+          image: andssil/techchallenge:latest
+          ports:
+            - containerPort: 8080
+          env:  
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Production      
+            - name: ConnectionStrings__Database
+              valueFrom: 
+               secretKeyRef:
+                name: api-secret
+                key: connectionString
+          imagePullPolicy: IfNotPresent               
+          resources:
+            requests:
+              cpu: 50m  
