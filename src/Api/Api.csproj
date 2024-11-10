@@ -25,10 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\Infra.Data\Infra.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="NovaPasta\" />
+    <ProjectReference Include="..\Infra.MessageBroker\Infra.MessageBroker.csproj" />
   </ItemGroup>
 
 </Project>

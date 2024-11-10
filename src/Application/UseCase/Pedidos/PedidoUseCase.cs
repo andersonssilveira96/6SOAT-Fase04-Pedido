@@ -3,6 +3,7 @@ using Application.DTOs.Pedido;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Enums;
+using Domain.Producer;
 using Domain.Repositories;
 
 namespace Application.UseCase.Pedidos
@@ -12,24 +13,14 @@ namespace Application.UseCase.Pedidos
         private readonly IPedidoRepository _repository;
         private readonly IProdutosRepository _produtoRepository;
         private readonly IMapper _mapper;
-        public PedidoUseCase(IPedidoRepository repository, IProdutosRepository produtoRepository, IMapper mapper)
+        private readonly IMessageBrokerProducer _messageBrokerProducer;
+        public PedidoUseCase(IPedidoRepository repository, IProdutosRepository produtoRepository, IMapper mapper, IMessageBrokerProducer messageBrokerProducer)
         {
             _repository = repository;
             _produtoRepository = produtoRepository;
             _mapper = mapper;
-        }
-
-        public async Task<PedidoDto> EnviarPagamento(long id)
-        {
-            var pedido = await _repository.ObterPorId(id);
-
-            if (pedido is null)
-                throw new Exception($"PedidoId {id} inválido");
-
-            pedido.AtualizarStatus(StatusEnum.Recebido);
-
-            return _mapper.Map<PedidoDto>(await _repository.Atualizar(pedido));
-        }
+            _messageBrokerProducer = messageBrokerProducer;
+        }        
 
         public async Task<PedidoDto> AtualizarStatus(long id, int status)
         {
@@ -62,11 +53,12 @@ namespace Application.UseCase.Pedidos
             }).ToList();
 
             var pedido = new Pedido(pedidoDto.ClienteId, pedidoProdutos, pedidoDto.Viagem);
+
             await _repository.Inserir(pedido);
 
-            // var pagamento = await _pagamentoUseCase.GerarPagamento(pedido);            
+            await _messageBrokerProducer.SendMessageAsync(pedido);            
    
-            return new Result<object> { Mensagem = "Pedido cadastrado com sucesso", Dados = new { NumeroPedido = 0 } };
+            return new Result<object> { Mensagem = "Pedido cadastrado com sucesso" };
         }
 
         public async Task<IEnumerable<PedidoDto>> Listar()
