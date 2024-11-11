@@ -6,6 +6,7 @@ using Infra.MessageBroker;
 using Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Domain.Consumer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,6 +55,11 @@ builder.Services.AddAuthenticationConfig();
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 var app = builder.Build();
+
+// Invocar o serviço
+using var scope = app.Services.CreateScope();
+var messageConsumer = scope.ServiceProvider.GetRequiredService<IMessageBrokerConsumer>();
+_ = Task.Run(() => messageConsumer.ReceiveMessageAsync());
 
 app.UseSwagger();
 
