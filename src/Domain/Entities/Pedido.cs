@@ -4,9 +4,15 @@ namespace Domain.Entities
 {
     public class Pedido
     {
+
         public Pedido()
         {
             
+        }
+        public Pedido(long id, StatusEnum status)
+        {
+            Id = id;
+            Status = status;
         }
         public Pedido(long? clienteid, ICollection<PedidoProduto> pedidoProdutos, bool viagem = false)
         {
