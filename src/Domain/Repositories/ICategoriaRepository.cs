@@ -4,6 +4,6 @@ namespace Domain.Repositories
 {
     public interface ICategoriaRepository
     {
-        Task<Categoria> ObterPorId(long id);
+        Task<Categoria> ObterPorId(int id);
     }
 }

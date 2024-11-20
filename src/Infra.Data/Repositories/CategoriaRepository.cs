@@ -1,7 +1,6 @@
-﻿using Domain.Repositories;
-using Domain.Entities;
+﻿using Domain.Entities;
+using Domain.Repositories;
 using Infra.Data.Context;
-using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Data.Repositories
 {
@@ -12,6 +11,6 @@ namespace Infra.Data.Repositories
         {
             _context = context;
         }
-        public async Task<Categoria> ObterPorId(long id) => await _context.Categoria.FirstOrDefaultAsync(x => x.Id == id);
+        public async Task<Categoria> ObterPorId(int id) => await _context.Categoria.FindAsync(id);
     }
 }

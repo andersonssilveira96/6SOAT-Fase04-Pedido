@@ -5,16 +5,19 @@ using Domain.Enums;
 
 namespace Infra.Data.Context
 {
-    public sealed class TechChallengeContext : DbContext
-    {         
+    public class TechChallengeContext : DbContext
+    {
+        public TechChallengeContext()
+        {            
+        }
         public TechChallengeContext(DbContextOptions<TechChallengeContext> options)
             : base(options)
         {
         }
-        public DbSet<Categoria> Categoria { get; set; } 
-        public DbSet<Pedido> Pedido { get; set; }
-        public DbSet<PedidoProduto> PedidoProduto { get; set; }
-        public DbSet<Produto> Produto { get; set; }
+        public virtual DbSet<Categoria> Categoria { get; set; } 
+        public virtual DbSet<Pedido> Pedido { get; set; }
+        public virtual DbSet<PedidoProduto> PedidoProduto { get; set; }
+        public virtual DbSet<Produto> Produto { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
