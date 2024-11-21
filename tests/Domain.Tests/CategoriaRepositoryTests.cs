@@ -20,7 +20,7 @@ public class CategoriaRepositoryTests
         // Preenchendo o banco com dados de teste
         if(!_context.Categoria.Any())
         {
-            _context.Categoria.Add(new Categoria { Id = 2, Descricao = "Categoria Teste" });
+            _context.Categoria.Add(new Categoria { Id = 1, Descricao = "Categoria Teste" });
             _context.SaveChanges();
         }
 

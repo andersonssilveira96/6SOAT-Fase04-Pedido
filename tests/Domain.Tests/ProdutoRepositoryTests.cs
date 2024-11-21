@@ -17,11 +17,10 @@ public class ProdutosRepositoryTests
 
         _context = new TechChallengeContext(options);
 
-        // Preenchendo o banco com dados de teste
-        // Preenchendo o banco com dados de teste                            
+        // Preenchendo o banco com dados de teste                        
         if (!_context.Categoria.Any())
         {
-            var categoria = new Categoria { Id = 2, Descricao = "Categoria Teste" };
+            var categoria = new Categoria { Id = 3, Descricao = "Categoria Teste" };
             _context.Categoria.Add(categoria);
             _context.SaveChanges();
         }
@@ -104,7 +103,7 @@ public class ProdutosRepositoryTests
     public async Task Excluir_DeveRemoverProdutoComSucesso()
     {
         // Arrange
-        var produtoExistente = new Produto(2, "Produto Teste 2", 10, _context.Categoria.First());
+        var produtoExistente = new Produto(88, "Produto Teste 2", 10, _context.Categoria.First());
         _context.Produto.Add(produtoExistente);
         _context.SaveChanges();
 

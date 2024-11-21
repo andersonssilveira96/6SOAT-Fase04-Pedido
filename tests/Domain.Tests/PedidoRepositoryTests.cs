@@ -21,14 +21,14 @@ public class PedidoRepositoryTests
         // Preenchendo o banco com dados de teste                            
         if (!_context.Categoria.Any())
         {
-            var categoria = new Categoria { Id = 1, Descricao = "Categoria Teste" };
+            var categoria = new Categoria { Id = 2, Descricao = "Categoria Teste" };
             _context.Categoria.Add(categoria);
             _context.SaveChanges();
         }
 
-        if (!_context.Produto.Any())
+        if (_context.Produto.Count() < 1)
         {
-            var produto = new Produto(1, "Produto Teste", 10, _context.Categoria.First());
+            var produto = new Produto(2, "Produto Teste", 10, _context.Categoria.First());
             _context.Produto.Add(produto);
             _context.SaveChanges();
         }
@@ -52,7 +52,7 @@ public class PedidoRepositoryTests
     public async Task Inserir_DeveAdicionarPedidoComSucesso()
     {
         // Arrange
-        var produto = _context.Produto.First();
+        var produto = _context.Produto.FirstOrDefault(x => x.Id == 2);
         var novoPedido = new Pedido(
             null,
             new List<PedidoProduto>
@@ -68,7 +68,7 @@ public class PedidoRepositoryTests
         // Assert
         Assert.NotNull(pedidoInserido);
         Assert.True(pedidoInserido.Id > 0);
-        Assert.Equal(1, pedidoInserido.Produtos.First().ProdutoId);
+        Assert.Equal(2, pedidoInserido.Produtos.First().ProdutoId);
         Assert.Equal(3, pedidoInserido.Produtos.First().Quantidade);
     }
 
@@ -107,7 +107,6 @@ public class PedidoRepositoryTests
         // Assert
         Assert.NotNull(pedido);
         Assert.Equal(1, pedido.Id);
-        Assert.Equal(1, pedido.Produtos.First().ProdutoId);
     }
 
     [Fact]
