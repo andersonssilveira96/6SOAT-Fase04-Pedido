@@ -89,10 +89,10 @@ public class PedidoUseCaseSteps
         var dto = new CadastrarPedidoDto
         {
             ClienteId = 1,
-            Produtos = new List<PedidoProdutoBaseDto>
+            Produtos = new List<PedidoProdutoDto>
             {
-                new PedidoProdutoBaseDto { ProdutoId = 1, Quantidade = 2 },
-                new PedidoProdutoBaseDto { ProdutoId = 2, Quantidade = 3 }
+                new PedidoProdutoDto { ProdutoId = 1, Quantidade = 2, ValorUnitario = 1, Nome = "Teste", Observacao = string.Empty },
+                new PedidoProdutoDto { ProdutoId = 2, Quantidade = 3, ValorUnitario = 2, Nome = "Teste 2", Observacao = string.Empty }
             },
             Viagem = false
         };

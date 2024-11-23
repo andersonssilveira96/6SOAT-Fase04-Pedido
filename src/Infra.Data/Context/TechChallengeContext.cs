@@ -2,9 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using Domain.Enums;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Infra.Data.Context
 {
+    [ExcludeFromCodeCoverage]
     public class TechChallengeContext : DbContext
     {
         public TechChallengeContext()
