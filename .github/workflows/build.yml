@@ -3,10 +3,11 @@ name: Build and Publish .NET Project
 on:
   push:
     branches:
-      - master 
+      - master
   pull_request:
     branches:
       - master
+
 jobs:
   build:
     name: Build and Test .NET Project
@@ -21,19 +22,19 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 8
+          dotnet-version: 8.x # Versão do .NET atualizada para 8
 
       # Restore dependências
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore TechChallenge.Pedido.sln # Substitua pelo nome do seu arquivo .sln
 
       # Build do projeto
       - name: Build project
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build TechChallenge.Pedido.sln --no-restore --configuration Release
 
       # Executar os testes e calcular a cobertura
       - name: Run tests and collect coverage
-        run: dotnet test --no-build --configuration Release --collect:"XPlat Code Coverage"
+        run: dotnet test TechChallenge.Pedido.sln --no-build --configuration Release --collect:"XPlat Code Coverage"
 
       # Publicar relatório de cobertura
       - name: Upload code coverage report
