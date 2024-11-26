@@ -76,7 +76,7 @@ public class PedidoUseCaseSteps
         Assert.Equal(mensagem, _exception.Message);
     }
 
-    [Given(@"os produtos com IDs (\d+) e (\d+) existem no repositório")]
+    [Given(@"os produtos com IDs (.*) e (.*) existem no repositório")]
     public void DadoOsProdutosComIDsExistemNoRepositorio(long id1, long id2)
     {
         _produtoRepositoryMock.Setup(r => r.ObterPorId(id1)).ReturnsAsync(new Produto(id1, string.Empty, 0, null));
