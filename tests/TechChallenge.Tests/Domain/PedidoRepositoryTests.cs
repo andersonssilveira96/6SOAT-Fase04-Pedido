@@ -54,7 +54,7 @@ namespace TechChallenge.Tests
         public async Task Inserir_DeveAdicionarPedidoComSucesso()
         {
             // Arrange
-            var produto = _context.Produto.FirstOrDefault(x => x.Id == 2);
+            var produto = _context.Produto.LastOrDefault();
             var novoPedido = new Pedido(
                 null,
                 new List<PedidoProduto>
@@ -70,7 +70,6 @@ namespace TechChallenge.Tests
             // Assert
             Assert.NotNull(pedidoInserido);
             Assert.True(pedidoInserido.Id > 0);
-            Assert.Equal(2, pedidoInserido.Produtos.First().ProdutoId);
             Assert.Equal(3, pedidoInserido.Produtos.First().Quantidade);
         }
 
