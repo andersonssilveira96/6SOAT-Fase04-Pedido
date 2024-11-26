@@ -1,4 +1,4 @@
-using Application.DTOs.Pedido;
+ï»¿using Application.DTOs.Pedido;
 using Application.UseCase.Pedidos;
 using AutoMapper;
 using Domain.Entities;
@@ -42,7 +42,7 @@ namespace TechChallenge.Tests
                }));
         }
 
-        [Given(@"um pedido com ID (.*) existe no repositório com status ""(.*)""")]
+        [Given(@"um pedido com ID (.*) existe no repositÃ³rio com status ""(.*)""")]
         public void DadoUmPedidoExisteNoRepositorioComStatus(long id, string status)
         {
             var pedido = new Pedido(id, Enum.Parse<StatusEnum>(status));
@@ -51,7 +51,7 @@ namespace TechChallenge.Tests
             _pedidoRepositoryMock.Setup(r => r.Atualizar(It.IsAny<Pedido>())).ReturnsAsync((Pedido p) => p);
         }
 
-        [When(@"o status do pedido é atualizado para ""(.*)""")]
+        [When(@"o status do pedido Ã© atualizado para ""(.*)""")]
         public async Task QuandoOStatusDoPedidoEAtualizadoPara(string status)
         {
             try
@@ -71,21 +71,21 @@ namespace TechChallenge.Tests
             Assert.Equal(status, pedido.Status.ToString());
         }
 
-        [Then(@"uma exceção deve ser lançada com a mensagem ""(.*)""")]
+        [Then(@"uma exceÃ§Ã£o deve ser lanÃ§ada com a mensagem ""(.*)""")]
         public void EntaoUmaExcecaoDeveSerLancadaComAMensagem(string mensagem)
         {
             Assert.NotNull(_exception);
             Assert.Equal(mensagem, _exception.Message);
         }
 
-        [Given(@"os produtos com IDs (.*) e (.*) existem no repositório")]
+        [Given(@"os produtos com IDs (.*) e (.*) existem no repositÃ³rio")]
         public void DadoOsProdutosComIDsExistemNoRepositorio(long id1, long id2)
         {
             _produtoRepositoryMock.Setup(r => r.ObterPorId(id1)).ReturnsAsync(new Produto(id1, string.Empty, 0, null));
             _produtoRepositoryMock.Setup(r => r.ObterPorId(id2)).ReturnsAsync(new Produto(id2, string.Empty, 0, null));
         }
 
-        [When(@"um pedido com esses produtos é cadastrado")]
+        [When(@"um pedido com esses produtos Ã© cadastrado")]
         public async Task QuandoUmPedidoComEssesProdutosECadastrado()
         {
             var dto = new CadastrarPedidoDto
@@ -122,7 +122,9 @@ namespace TechChallenge.Tests
             _messageBrokerMock.Verify(m => m.SendMessageAsync(It.IsAny<Pedido>()), Times.Once);
         }
 
-        [Given(@"pedidos com diferentes status existem no repositório")]
+        [Given(@"pedidos com diferentes status existem no repositÃ³rio")]
+        [Given(@"pedidos com diferentes status existem no repositï¿½rio")]
+
         public void DadoPedidosComDiferentesStatusExistemNoRepositorio()
         {
             var pedidos = new List<Pedido>
@@ -137,20 +139,20 @@ namespace TechChallenge.Tests
             _pedidoRepositoryMock.Setup(r => r.ListarPedidos()).ReturnsAsync(pedidos);
         }
 
-        [When(@"a lista de pedidos é consultada")]
+        [When(@"a lista de pedidos Ã© consultada")]
         public async Task QuandoAListaDePedidosEConsultada()
         {
             _result = await _useCase.Listar();
         }
 
-        [Then(@"somente pedidos não finalizados devem ser retornados")]
+        [Then(@"somente pedidos nÃ£o finalizados devem ser retornados")]
         public void EntaoSomentePedidosNaoFinalizadosDevemSerRetornados()
         {
             var pedidos = _result as IEnumerable<PedidoDto>;
             Assert.All(pedidos, p => Assert.NotEqual(StatusEnum.Finalizado.ToString(), p.Status));
         }
 
-        [Then(@"os pedidos devem ser ordenados por status e data de criação")]
+        [Then(@"os pedidos devem ser ordenados por status e data de criaÃ§Ã£o")]
         public void ThenOsPedidosDevemSerOrdenadosPorStatusEDataDeCriacao()
         {
             Assert.Null(_exception);
@@ -171,12 +173,12 @@ namespace TechChallenge.Tests
             Assert.Equal(pedidoList, statusOrdenado);
         }
 
-        [When(@"o status de pagamento é consultado")]
+        [When(@"o status de pagamento Ã© consultado")]
         public async Task WhenOStatusDePagamentoEConsultado()
         {
             try
             {
-                _result = await _useCase.ConsultarStatusPagamento(1); // Supondo que o ID do pedido é 1
+                _result = await _useCase.ConsultarStatusPagamento(1); // Supondo que o ID do pedido Ã© 1
             }
             catch (Exception ex)
             {
@@ -187,7 +189,7 @@ namespace TechChallenge.Tests
         [Then(@"o pagamento deve estar aprovado")]
         public void ThenOPagamentoDeveEstarAprovado()
         {
-            Assert.Null(_exception); // Certifique-se de que nenhuma exceção foi lançada
+            Assert.Null(_exception); // Certifique-se de que nenhuma exceÃ§Ã£o foi lanÃ§ada
             var statusPagamentoDto = _result as StatusPagamentoDto;
             Assert.NotNull(statusPagamentoDto);
             Assert.True(statusPagamentoDto.PagamentoAprovado);
