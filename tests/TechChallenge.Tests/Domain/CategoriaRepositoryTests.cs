@@ -22,7 +22,7 @@ namespace TechChallenge.Tests
             // Preenchendo o banco com dados de teste
             if (!_context.Categoria.Any())
             {
-                _context.Categoria.Add(new Categoria { Id = 1, Descricao = "Categoria Teste" });
+                _context.Categoria.Add(new Categoria { Id = 2, Descricao = "Categoria Teste 2" });
                 _context.SaveChanges();
             }
 
@@ -38,7 +38,7 @@ namespace TechChallenge.Tests
             // Assert
             Assert.NotNull(result);
             Assert.Equal(2, result.Id);
-            Assert.Equal("Categoria Teste", result.Descricao);
+            Assert.Equal("Categoria Teste 2", result.Descricao);
         }
 
         [Fact]

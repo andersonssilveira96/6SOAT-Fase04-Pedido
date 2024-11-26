@@ -23,7 +23,7 @@ namespace TechChallenge.Tests
             // Preenchendo o banco com dados de teste                            
             if (!_context.Categoria.Any())
             {
-                var categoria = new Categoria { Id = 2, Descricao = "Categoria Teste" };
+                var categoria = new Categoria { Id = 1, Descricao = "Categoria Teste" };
                 _context.Categoria.Add(categoria);
                 _context.SaveChanges();
             }
