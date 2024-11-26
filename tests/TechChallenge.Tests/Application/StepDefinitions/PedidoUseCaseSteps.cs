@@ -40,7 +40,7 @@ public class PedidoUseCaseSteps
            }));
     }
 
-    [Given(@"um pedido com ID (\d+) existe no repositório com status ""(.*)""")]
+    [Given(@"um pedido com ID (.*) existe no repositório com status ""(.*)""")]
     public void DadoUmPedidoExisteNoRepositorioComStatus(long id, string status)
     {
         var pedido = new Pedido(id, Enum.Parse<StatusEnum>(status));
