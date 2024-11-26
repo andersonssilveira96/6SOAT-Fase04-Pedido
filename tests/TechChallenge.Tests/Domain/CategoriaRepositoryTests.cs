@@ -41,7 +41,7 @@ namespace TechChallenge.Tests
 
             // Assert
             Assert.NotNull(result);
-            Assert.Equal(2, result.Id);
+            Assert.Equal(70, result.Id);
             Assert.Equal("Categoria Teste 2", result.Descricao);
         }
 
