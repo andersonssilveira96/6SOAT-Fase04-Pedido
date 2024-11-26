@@ -32,15 +32,12 @@ namespace TechChallenge.Tests
         [Fact]
         public async Task ObterPorId_DeveRetornarCategoria_QuandoCategoriaExiste()
         {
-            // Arrange 
-            if (!_context.Categoria.Any())
-            {
-                _context.Categoria.Add(new Categoria { Id = 2, Descricao = "Categoria Teste 2" });
-                _context.SaveChanges();
-            }
+            // Arrange             
+            _context.Categoria.Add(new Categoria { Id = 70, Descricao = "Categoria Teste 2" });
+            _context.SaveChanges();            
 
             // Act
-            var result = await _repository.ObterPorId(2);
+            var result = await _repository.ObterPorId(70);
 
             // Assert
             Assert.NotNull(result);
