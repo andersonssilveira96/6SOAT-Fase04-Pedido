@@ -35,7 +35,19 @@ jobs:
       # Executar os testes e calcular a cobertura
       - name: Run tests and collect coverage
         run: dotnet test TechChallenge.Pedido.sln --no-build --configuration Release --collect:"XPlat Code Coverage"
+        
+      # Instalar o ReportGenerator
+      - name: Install ReportGenerator
+        run: dotnet tool install -g dotnet-reportgenerator-globaltool
 
+      # Gerar o relatório de cobertura
+      - name: Generate coverage report
+        run: reportgenerator -reports:./TestResults/**/coverage.cobertura.xml -targetdir:./coverage-report -reporttypes:TextSummary
+
+      # Mostrar o resumo no console
+      - name: Show coverage summary
+        run: cat ./coverage-report/Summary.txt
+        
       # Publicar relatório de cobertura
       - name: Upload code coverage report
         uses: actions/upload-artifact@v3
