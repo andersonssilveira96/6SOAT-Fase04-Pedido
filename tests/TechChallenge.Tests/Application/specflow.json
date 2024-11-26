@@ -1,0 +1,7 @@
+﻿{
+  "specFlow": {
+    "unitTestProvider": {
+      "name": "xUnit" // Altere para NUnit ou MSTest se necessário
+    }
+  }
+}
