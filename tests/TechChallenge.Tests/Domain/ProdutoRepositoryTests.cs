@@ -40,6 +40,14 @@ namespace TechChallenge.Tests
         [Fact]
         public async Task ObterPorId_DeveRetornarProduto_QuandoProdutoExiste()
         {
+            // Arrange
+            if (!_context.Produto.Any())
+            {
+                var tempProd = new Produto(1, "Produto Teste", 10, _context.Categoria.First());
+                _context.Produto.Add(tempProd);
+                _context.SaveChanges();
+            }
+
             // Act
             var produto = await _repository.ObterPorId(1);
 
