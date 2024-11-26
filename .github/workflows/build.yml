@@ -1,5 +1,4 @@
-name: Build and Publish .NET Project
-
+name: build & deploy
 on:
   push:
     branches:
