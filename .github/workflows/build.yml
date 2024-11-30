@@ -1,5 +1,4 @@
-name: Build and Publish .NET Project
-
+name: build & deploy
 on:
   push:
     branches:
@@ -70,9 +69,9 @@ jobs:
         working-directory: .
         run: |
           TAG=$(date +%Y%m%d%H%M%S)
-          docker build -t ${{secrets.DOCKER_USER}}/techchallenge:latest -t ${{secrets.DOCKER_USER}}/techchallenge-pedido:$TAG . --no-cache
-          docker push ${{secrets.DOCKER_USER}}/techchallenge:$TAG
-          docker push ${{secrets.DOCKER_USER}}/techchallenge:latest    
+          docker build -t ${{secrets.DOCKER_USER}}/techchallenge-pedido:latest -t ${{secrets.DOCKER_USER}}/techchallenge-pedido:$TAG . --no-cache
+          docker push ${{secrets.DOCKER_USER}}/techchallenge-pedido:$TAG
+          docker push ${{secrets.DOCKER_USER}}/techchallenge-pedido:latest    
           
   deploy-aws:      
      needs: docker-build             
