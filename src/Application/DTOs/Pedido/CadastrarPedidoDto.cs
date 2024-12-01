@@ -3,7 +3,7 @@
     public class CadastrarPedidoDto
     {
         public long? ClienteId { get; set; }
-        public virtual List<PedidoProdutoDto> Produtos { get; set; }
+        public virtual List<PedidoProdutoBaseDto> Produtos { get; set; }
         public bool Viagem { get; set; }
     }
 }

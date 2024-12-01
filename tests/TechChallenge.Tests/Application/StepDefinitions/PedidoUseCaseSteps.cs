@@ -91,10 +91,10 @@ namespace TechChallenge.Tests
             var dto = new CadastrarPedidoDto
             {
                 ClienteId = 1,
-                Produtos = new List<PedidoProdutoDto>
+                Produtos = new List<PedidoProdutoBaseDto>
             {
-                new PedidoProdutoDto { ProdutoId = 1, Quantidade = 2, ValorUnitario = 1, Nome = "Teste", Observacao = string.Empty },
-                new PedidoProdutoDto { ProdutoId = 2, Quantidade = 3, ValorUnitario = 2, Nome = "Teste 2", Observacao = string.Empty }
+                new PedidoProdutoBaseDto { ProdutoId = 1, Quantidade = 2 },
+                new PedidoProdutoBaseDto { ProdutoId = 2, Quantidade = 3 }
             },
                 Viagem = false
             };
