@@ -3,7 +3,7 @@ O principal objetivo deste projeto foi desenvolver uma solucao para gerenciar o 
 
 ## Versao
 
-3.0.0
+4.0.0
  
 Obrigado pela visita e bom codigo!
 
