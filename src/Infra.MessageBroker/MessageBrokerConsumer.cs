@@ -46,7 +46,7 @@ namespace Infra.MessageBroker
                 await _pedidoUseCase.AtualizarStatus(pedido.Id, !string.IsNullOrEmpty(pedido.Status) ? (int)Enum.Parse<StatusEnum>(pedido.Status) : (int)StatusEnum.Cancelado);
             };
 
-            await _channel.BasicConsumeAsync(queue: "pedidos-atualizados", autoAck: true, consumer: consumer);
+            await _channel.BasicConsumeAsync(queue: "pedidos-atualizados", autoAck: false, consumer: consumer);
         }
 
         public void Dispose()
