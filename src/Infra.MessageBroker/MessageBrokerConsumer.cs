@@ -41,10 +41,12 @@ namespace Infra.MessageBroker
 
                 var pedido = JsonSerializer.Deserialize<PedidoDto>(message)!;
 
+                Console.WriteLine($"Pedido: { JsonSerializer.Serialize(message) }");
+
                 await _pedidoUseCase.AtualizarStatus(pedido.Id, !string.IsNullOrEmpty(pedido.Status) ? int.Parse(pedido.Status) : (int)StatusEnum.Cancelado);
             };
 
-            await _channel.BasicConsumeAsync(queue: "pedidos-atualizados", autoAck: true, consumer: consumer);
+            await _channel.BasicConsumeAsync(queue: "pedidos-atualizados", autoAck: false, consumer: consumer);
         }
 
         public void Dispose()
